@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c656157084dd14f936982b91d34b08, type: 3}
+  m_Name: PopperConfig
+  m_EditorClassIdentifier: 
+  startState: 0
+  yellowSprite: {fileID: 21300000, guid: f3813befbc0df414180b230b72072b4d, type: 3}
+  blueSprite: {fileID: 21300000, guid: cd0a7339e59046a4587878627b990df6, type: 3}
+  purpleSprite: {fileID: 21300000, guid: ee6674579a5e3b844b29e2d6f05d6bd4, type: 3}
+  leftEyePrefab: {fileID: 6721332436426091580, guid: feebf42fafa55ce49930d1af46ee43ee, type: 3}
+  rightEyePrefab: {fileID: 2304054298749184595, guid: 30b40e5de1000cb41b59c651f99d6e76, type: 3}
