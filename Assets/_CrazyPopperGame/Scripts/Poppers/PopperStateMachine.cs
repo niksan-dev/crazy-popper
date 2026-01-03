@@ -12,7 +12,7 @@ namespace CrazyPopper.Poppers
                 return true;
 
             state--;
-            EventBus.RaisePopperStateChanged(state);
+            EventBus.RaisePopperStateChanged(state, this.GetComponent<PopperEntity>());
             return false;
         }
     }

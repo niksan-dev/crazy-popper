@@ -10,9 +10,6 @@ public class PopperConfig : ScriptableObject
     public Sprite blueSprite;
     public Sprite purpleSprite;
 
-    public GameObject leftEyePrefab;
-    public GameObject rightEyePrefab;
-
     public Sprite GetSprite(PopperState state)
     {
         return state switch

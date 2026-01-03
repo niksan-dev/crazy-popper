@@ -9,10 +9,11 @@ namespace CrazyPopper.Poppers
         [SerializeField] private PopperConfig config;
 
         private SpriteRenderer sr;
-
+        private PopperEntity _entity;
         private void Awake()
         {
             sr = GetComponent<SpriteRenderer>();
+            _entity = GetComponent<PopperEntity>();
             AttachEyes();
         }
 
@@ -26,15 +27,18 @@ namespace CrazyPopper.Poppers
             EventBus.OnPopperStateChanged -= OnStateChanged;
         }
 
-        private void OnStateChanged(PopperState state)
+        private void OnStateChanged(PopperState state, PopperEntity entity)
         {
-            sr.sprite = config.GetSprite(state);
+            if (entity != _entity) return;
+            Sprite spr = config.GetSprite(state);
+            Debug.Log($"Sprite Name : {spr.name}");
+            sr.sprite = spr;
         }
 
         private void AttachEyes()
         {
-            Instantiate(config.leftEyePrefab, transform);
-            Instantiate(config.rightEyePrefab, transform);
+            // Instantiate(config.leftEyePrefab, transform);
+            // Instantiate(config.rightEyePrefab, transform);
         }
     }
 }

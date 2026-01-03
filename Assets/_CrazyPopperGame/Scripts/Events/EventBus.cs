@@ -8,9 +8,9 @@ namespace CrazyPopper.Events
     {
         public static event Action OnClickPlay;
         public static event Action OnRegisterPopper;
-        public static event Action<PopperState> OnPopperStateChanged;
+        public static event Action<PopperState, PopperEntity> OnPopperStateChanged;
         public static void RaiseClickPlay() => OnClickPlay?.Invoke();
         public static void RegisterPopper() => OnRegisterPopper?.Invoke();
-        public static void RaisePopperStateChanged(PopperState state) => OnPopperStateChanged?.Invoke(state);
+        public static void RaisePopperStateChanged(PopperState state, PopperEntity sender) => OnPopperStateChanged?.Invoke(state, sender);
     }
 }
