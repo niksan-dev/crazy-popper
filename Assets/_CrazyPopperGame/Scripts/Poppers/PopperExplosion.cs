@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using CrazyPopper.Core;
 
-public class PopperExplosion : MonoBehaviour
+namespace CrazyPopper.Poppers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class PopperExplosion : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Explode()
+        {
+            ProjectileSpawner.Spawn(transform.position);
+            //PuffSpawner.Spawn(transform.position);
+            //AudioManager.Instance.PlayPop();
+            Destroy(gameObject);
+        }
     }
 }

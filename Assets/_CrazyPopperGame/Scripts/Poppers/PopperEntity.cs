@@ -16,7 +16,7 @@ namespace CrazyPopper.Poppers
         private void Awake()
         {
             stateMachine = GetComponent<PopperStateMachine>();
-            //explosion = GetComponent<PopperExplosion>();
+            explosion = GetComponent<PopperExplosion>();
 
             //Initialize(PopperState.Yellow);
         }
@@ -47,6 +47,7 @@ namespace CrazyPopper.Poppers
         {
             //spawn projectiles, effects, sounds, etc//TODO:
             PopperFactory.Destroy(this);
+            explosion.Explode();
         }
 
 
