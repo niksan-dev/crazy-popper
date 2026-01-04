@@ -12,7 +12,7 @@ public static class PopperFactory
             .Spawn(position, Quaternion.identity);
 
         popper.Initialize(state);
-        //EyeFactory.AttachEyes(popper.transform);
+        EyeFactory.AttachEyes(popper.transform);
 
         return popper;
     }

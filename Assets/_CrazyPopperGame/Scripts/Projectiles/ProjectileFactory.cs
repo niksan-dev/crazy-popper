@@ -1,6 +1,6 @@
 using UnityEngine;
 using CrazyPopper.Projectiles;
-public static class ProjectileSpawner
+public static class ProjectileFactory
 {
     public static GameObject projectilePrefab;
 

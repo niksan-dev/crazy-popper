@@ -1,3 +1,4 @@
+using CrazyPopper.Events;
 using UnityEngine;
 
 namespace CrazyPopper.Poppers
@@ -15,6 +16,7 @@ namespace CrazyPopper.Poppers
         {
             // if (TurnManager.Instance.UseTap())
             entity.ReactToInput();
+            EventBus.RaiseTapPopper();
         }
     }
 }

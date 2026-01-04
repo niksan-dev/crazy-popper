@@ -6,7 +6,7 @@ namespace CrazyPopper.Projectiles
     public class Projectile : MonoBehaviour, IPoolable
     {
         private Vector2 dir;
-        private float speed = 5f;
+        private float speed = 8f;
 
         public void Init(Vector2 direction) => dir = direction.normalized;
 

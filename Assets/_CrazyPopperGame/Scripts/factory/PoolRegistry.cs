@@ -20,9 +20,9 @@ public class PoolRegistry : MonoBehaviour
     {
         Instance = this;
 
-        PopperPool = new ObjectPool<PopperEntity>(popperPrefab, 30, transform);
-        LeftEyePool = new ObjectPool<EyeView>(leftEyePrefab, 60, transform);
-        RightEyePool = new ObjectPool<EyeView>(rightEyePrefab, 60, transform);
+        PopperPool = new ObjectPool<PopperEntity>(popperPrefab, 20, transform);
+        LeftEyePool = new ObjectPool<EyeView>(leftEyePrefab, 40, transform);
+        RightEyePool = new ObjectPool<EyeView>(rightEyePrefab, 40, transform);
         ProjectilePool = new ObjectPool<Projectile>(projectilePrefab, 20, transform);
     }
 }
