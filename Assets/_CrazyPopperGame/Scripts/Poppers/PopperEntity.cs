@@ -9,21 +9,19 @@ namespace CrazyPopper.Poppers
         public PopperState State => state;
 
         [SerializeField] private PopperState state;
-
-        private PopperStateMachine stateMachine;
         private PopperExplosion explosion;
+
+        internal bool IsPopped = false;
 
         private void Awake()
         {
-            stateMachine = GetComponent<PopperStateMachine>();
             explosion = GetComponent<PopperExplosion>();
-
-            //Initialize(PopperState.Yellow);
         }
 
         public void Initialize(PopperState start)
         {
             state = start;
+            IsPopped = false;
             //Debug.Log($"Popper reacted to state: {state}");
             EventBus.RaisePopperStateChanged(state, this);
             EventBus.RegisterPopper();
@@ -41,11 +39,13 @@ namespace CrazyPopper.Poppers
 
             Debug.Log($"Popper reacted to state: {state}");
             EventBus.RaisePopperStateChanged(state, this);
+
         }
 
         private void Explode()
         {
             //spawn projectiles, effects, sounds, etc//TODO:
+            IsPopped = true;
             PopperFactory.Destroy(this);
             explosion.Explode();
         }

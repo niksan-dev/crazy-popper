@@ -1,5 +1,6 @@
 using UnityEngine;
 using CrazyPopper.Poppers;
+using CrazyPopper.Events;
 
 namespace CrazyPopper.Projectiles
 {
@@ -8,7 +9,11 @@ namespace CrazyPopper.Projectiles
         private Vector2 dir;
         private float speed = 8f;
 
-        public void Init(Vector2 direction) => dir = direction.normalized;
+        public void Init(Vector2 direction)
+        {
+            dir = direction.normalized;
+            EventBus.RaiseRegisterReactionTracker(true);
+        }
 
         private void Update()
         {
@@ -17,16 +22,18 @@ namespace CrazyPopper.Projectiles
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.TryGetComponent(out PopperEntity p))
+            if (col.TryGetComponent(out PopperEntity p) && p.IsPopped == false)
             {
                 p.ReactToInput();
                 PoolRegistry.Instance.ProjectilePool.Despawn(this);
+                EventBus.RaiseRegisterReactionTracker(false);
             }
 
             //check for walls or out of bounds
             if (col.gameObject.tag == "Wall" || col.gameObject.tag == "Bounds")
             {
                 PoolRegistry.Instance.ProjectilePool.Despawn(this);
+                EventBus.RaiseRegisterReactionTracker(false);
             }
         }
 

@@ -14,9 +14,10 @@ namespace CrazyPopper.Poppers
 
         private void OnMouseDown()
         {
-            // if (TurnManager.Instance.UseTap())
+            if (ReactionTracker.Instance.activeReactions > 0)
+                return;
             entity.ReactToInput();
-            EventBus.RaiseTapPopper();
+            TurnManager.Instance.ConsumeMove();
         }
     }
 }

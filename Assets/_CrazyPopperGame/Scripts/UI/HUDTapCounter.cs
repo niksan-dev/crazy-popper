@@ -14,20 +14,20 @@ public class HUDTapCounter : MonoBehaviour
 
     void OnEnable()
     {
-        tapCount = 2;
-        EventBus.OnTapPopper += OnTapPopper;
+        //  tapCount = 2;
+        EventBus.OnConsumedMove += OnConsumedMove;
         UpdateTapCounterText();
     }
 
     void OnDisable()
     {
-        EventBus.OnTapPopper -= OnTapPopper;
+        EventBus.OnConsumedMove -= OnConsumedMove;
     }
 
-    void OnTapPopper()
+    void OnConsumedMove(int remainingMoves)
     {
-        Debug.Log("HUDTapCounter - OnTapPopper received");
-        tapCount = Mathf.Max(0, tapCount - 1);
+        Debug.Log($"HUDTapCounter - OnConsumedMove received {remainingMoves}");
+        tapCount = Mathf.Max(0, remainingMoves);
         UpdateTapCounterText();
 
         if (tapCount == 0)

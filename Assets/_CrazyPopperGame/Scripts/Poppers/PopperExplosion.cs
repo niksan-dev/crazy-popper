@@ -1,5 +1,6 @@
 using UnityEngine;
 using CrazyPopper.Core;
+using CrazyPopper.Events;
 
 namespace CrazyPopper.Poppers
 {
@@ -9,8 +10,9 @@ namespace CrazyPopper.Poppers
         {
             ProjectileFactory.Spawn(transform.position);
             PuffFactory.Spawn(transform.position);
+            EventBus.UnregisterPopper();
             //AudioManager.Instance.PlayPop();
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
