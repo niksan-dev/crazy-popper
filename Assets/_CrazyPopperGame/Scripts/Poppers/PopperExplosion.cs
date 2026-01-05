@@ -8,7 +8,7 @@ namespace CrazyPopper.Poppers
         public void Explode()
         {
             ProjectileFactory.Spawn(transform.position);
-            //PuffSpawner.Spawn(transform.position);
+            PuffFactory.Spawn(transform.position);
             //AudioManager.Instance.PlayPop();
             Destroy(gameObject);
         }
