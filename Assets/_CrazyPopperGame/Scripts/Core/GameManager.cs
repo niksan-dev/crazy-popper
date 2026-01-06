@@ -3,7 +3,7 @@ using CrazyPopper.Events;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    public LevelsSO levelsSO;
     private int alivePoppers;
 
     private void Awake()

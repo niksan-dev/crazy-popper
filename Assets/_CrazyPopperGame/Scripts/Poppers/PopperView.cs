@@ -31,7 +31,7 @@ namespace CrazyPopper.Poppers
         {
             if (entity != _entity) return;
             Sprite spr = config.GetSprite(state);
-            Debug.Log($"Sprite Name : {spr.name}");
+            // Debug.Log($"Sprite Name : {spr.name}");
             sr.sprite = spr;
         }
 
