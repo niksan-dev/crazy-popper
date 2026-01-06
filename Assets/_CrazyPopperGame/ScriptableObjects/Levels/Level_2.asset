@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089af56d2591e884ca85aee8358376bb, type: 3}
   m_Name: Level_2
   m_EditorClassIdentifier: 
-  maxTaps: 0
+  maxTaps: 3
   size: {x: 3, y: 3}
   layout: 010000000200000001000000020000000000000002000000010000000200000001000000

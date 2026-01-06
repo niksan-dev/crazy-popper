@@ -55,6 +55,58 @@ namespace CrazyPopper.UI
             Show(view);
         }
 
+        public void Hide<T>() where T : BaseView
+        {
+            if (!viewMap.TryGetValue(typeof(T), out BaseView view))
+            {
+                Debug.LogError($"View not registered: {typeof(T)}");
+                return;
+            }
+
+            Hide(view);
+        }
+
+        private void Hide(BaseView view)
+        {
+            if (view.ViewType == ViewType.Popup)
+            {
+                HidePopup((PopupView)view);
+            }
+            else
+            {
+                HideScreen((ScreenView)view);
+            }
+        }
+
+        private void HidePopup(PopupView popup)
+        {
+            // Only top popup can be hidden
+            if (popupStack.Count == 0 || popupStack.Peek() != popup)
+            {
+                Debug.LogWarning("Trying to hide a popup that is not on top of stack");
+                return;
+            }
+
+            popupStack.Pop();
+            popup.Hide();
+        }
+
+        private void HideScreen(ScreenView screen)
+        {
+            // Only top screen can be hidden
+            if (screenStack.Count == 0 || screenStack.Peek() != screen)
+            {
+                Debug.LogWarning("Trying to hide a screen that is not active");
+                return;
+            }
+
+            screenStack.Pop();
+            screen.Hide();
+
+            if (screenStack.Count > 0)
+                screenStack.Peek().Show();
+        }
+
         private void Show(BaseView view)
         {
             if (view.ViewType == ViewType.Popup)

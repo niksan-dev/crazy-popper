@@ -16,12 +16,21 @@ public class HUDTapCounter : MonoBehaviour
     {
         //  tapCount = 2;
         EventBus.OnConsumedMove += OnConsumedMove;
-        UpdateTapCounterText();
+        EventBus.OnGameInitialized += (level) =>
+        {
+            tapCount = level.maxTaps;
+            UpdateTapCounterText();
+            Debug.Log($"HUDTapCounter - OnGameInitialized Unsubscribe {tapCount}");
+        };
     }
 
     void OnDisable()
     {
         EventBus.OnConsumedMove -= OnConsumedMove;
+        EventBus.OnGameInitialized -= (level) =>
+        {
+            Debug.Log("HUDTapCounter - OnGameInitialized Unsubscribe");
+        };
     }
 
     void OnConsumedMove(int remainingMoves)

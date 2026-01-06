@@ -22,8 +22,13 @@ public static class EyeFactory
         right.transform.localPosition = new Vector3(0.2f, 0.25f, 0);
     }
 
-    public static void DetachEyes(EyeView left, EyeView right)
+    public static void DetachEyes(Transform parent)
     {
+
+        var left = parent.transform.GetChild(0).GetComponent<EyeView>();
+        var right = parent.transform.GetChild(1).GetComponent<EyeView>();
+
+
         PoolRegistry.Instance.LeftEyePool.Despawn(left);
         PoolRegistry.Instance.RightEyePool.Despawn(right);
     }

@@ -4,16 +4,24 @@ using UnityEngine;
 
 namespace CrazyPopper.UI
 {
-    public class ScreenInGame : ScreenView
+    public class ScreenInGame : ScreenView, IBackKeyHandler
     {
         protected override void OnShow()
         {
             Debug.Log("In Game Screen Opened");
+            // Initialize game elements here
+            GameManager.Instance.InitializeGame();
         }
 
         protected override void OnHide()
         {
             Debug.Log("In Game Screen Closed");
+        }
+
+        public bool OnBackPressed()
+        {
+            UIViewManager.Instance.Show<PopupQuitGame>();
+            return true;
         }
     }
 }

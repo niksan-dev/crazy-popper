@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrazyPopper.Poppers;
 using UnityEngine;
 
 namespace CrazyPopper.UI
 {
-    public class PopupExit : PopupView
+    public class PopupLevelLose : PopupView
     {
         protected override void OnShow()
         {
-            Debug.Log("Popup Opened");
+            Debug.Log("Level Lose Popup Opened");
+            GameManager.Instance.audioManager.PlaySound(AudioType.Fail);
         }
 
         protected override void OnHide()
         {
-            Debug.Log("Popup Closed");
+            Debug.Log("Level Lose Popup Closed");
         }
     }
 }
-

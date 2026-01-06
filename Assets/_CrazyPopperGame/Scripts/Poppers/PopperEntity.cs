@@ -48,6 +48,7 @@ namespace CrazyPopper.Poppers
             IsPopped = true;
             PopperFactory.Destroy(this);
             explosion.Explode();
+            GameManager.Instance.audioManager.PlaySound(AudioType.Pop);
         }
 
 

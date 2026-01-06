@@ -14,10 +14,11 @@ namespace CrazyPopper.Core
 
         void Start()
         {
-            Spawn(levelConfig);
+            // Spawn(levelConfig);
         }
         public void Spawn(LevelConfig level)
         {
+            this.gameObject.SetActive(true);
             int i = 0;
             float offsetX = -(level.size.x / 2.0f) - (level.size.x % 2 == 0 ? popperXSize / 2.0f : 0);
             float offsetY = -(level.size.y / 2.0f) - (level.size.y % 2 == 0 ? popperYSize / 2.0f : 0);
@@ -33,6 +34,19 @@ namespace CrazyPopper.Core
                     );
                 }
             }
+        }
+
+        public void ClearGrid()
+        {
+            foreach (Transform child in transform)
+            {
+                PopperFactory.Destroy(child.transform.GetComponent<Poppers.PopperEntity>());
+            }
+        }
+
+        void OnDisable()
+        {
+            ClearGrid();
         }
     }
 }

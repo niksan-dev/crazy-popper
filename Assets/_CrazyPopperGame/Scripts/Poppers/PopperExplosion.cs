@@ -11,6 +11,7 @@ namespace CrazyPopper.Poppers
             ProjectileFactory.Spawn(transform.position);
             PuffFactory.Spawn(transform.position);
             EventBus.UnregisterPopper();
+
             //AudioManager.Instance.PlayPop();
             //Destroy(gameObject);
         }

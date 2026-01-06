@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CrazyPopper.UI
 {
-    public class ScreenMainMenu : ScreenView
+    public class ScreenMainMenu : ScreenView, IBackKeyHandler
     {
         protected override void OnShow()
         {
@@ -14,6 +14,12 @@ namespace CrazyPopper.UI
         protected override void OnHide()
         {
             Debug.Log("Home Screen Closed");
+        }
+
+        public bool OnBackPressed()
+        {
+            UIViewManager.Instance.Show<PopupExitGame>();
+            return true;
         }
     }
 }

@@ -20,5 +20,8 @@ public static class PopperFactory
     public static void Destroy(PopperEntity popper)
     {
         PoolRegistry.Instance.PopperPool.Despawn(popper);
+        EyeFactory.DetachEyes(
+               popper.transform
+            );
     }
 }

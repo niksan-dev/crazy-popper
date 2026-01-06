@@ -13,9 +13,23 @@ public class TurnManager : MonoBehaviour
 
     void OnEnable()
     {
-        RemainingMoves = Random.Range(3, 6);
-        EventBus.RaiseConsumedMove(RemainingMoves);
+        EventBus.OnGameInitialized += (level) =>
+         {
+             Debug.Log($"TurnManager - OnGameInitialized received  {level.maxTaps}");
+             RemainingMoves = level.maxTaps;
+             EventBus.RaiseConsumedMove(RemainingMoves);
+         };
     }
+
+    void OnDisable()
+    {
+        EventBus.OnGameInitialized -= (level) =>
+        {
+            RemainingMoves = 0;
+        };
+    }
+
+
 
     public void Init(int moves)
     {

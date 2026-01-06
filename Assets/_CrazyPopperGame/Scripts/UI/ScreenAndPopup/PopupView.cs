@@ -9,7 +9,7 @@ namespace CrazyPopper.UI
 
         CanvasGroup canvasGroup;
 
-        protected virtual void Start()
+        protected override void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }

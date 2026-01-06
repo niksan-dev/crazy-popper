@@ -15,6 +15,8 @@ namespace CrazyPopper.Events
         public static event Action<int> OnConsumedMove;
         public static event Action OnAllReactionsResolved;
         public static event Action<bool> OnRegisterReactionTracker;
+
+        public static event Action<LevelConfig> OnGameInitialized;
         public static void RaiseClickPlay() => OnClickPlay?.Invoke();
         public static void RegisterPopper() => OnRegisterPopper?.Invoke();
         public static void UnregisterPopper() => OnUnRegisterPopper?.Invoke();
@@ -22,5 +24,6 @@ namespace CrazyPopper.Events
         public static void RaiseConsumedMove(int remainingMoves) => OnConsumedMove?.Invoke(remainingMoves);
         public static void RaiseAllReactionsResolved() => OnAllReactionsResolved?.Invoke();
         public static void RaiseRegisterReactionTracker(bool isRegistering) => OnRegisterReactionTracker?.Invoke(isRegistering);
+        public static void RaiseGameInitialized(LevelConfig level) => OnGameInitialized?.Invoke(level);
     }
 }

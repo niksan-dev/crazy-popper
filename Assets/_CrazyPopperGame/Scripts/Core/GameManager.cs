@@ -1,10 +1,15 @@
 using UnityEngine;
 using CrazyPopper.Events;
+using CrazyPopper.UI;
+using CrazyPopper.Core;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public LevelsSO levelsSO;
+    public AudioManager audioManager;
+    [SerializeField] private GridSpawner gridSpawner;
     private int alivePoppers;
+    internal int currentLevelIndex = 0;
 
     private void Awake()
     {
@@ -23,9 +28,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void InitLevel()
+    public void InitializeGame()
     {
-
+        ResetAllCounters();
+        LevelConfig level = levelsSO.levels[currentLevelIndex];
+        gridSpawner.Spawn(level);
+        EventBus.RaiseGameInitialized(level);
     }
 
     void ResetAllCounters()
@@ -78,11 +86,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LEVEL COMPLETE");
         // UI, audio, next level
+        UIViewManager.Instance.Show<PopupLevelWin>();
     }
 
     private void Lose()
     {
         Debug.Log("LEVEL FAILED");
         // UI, retry
+        UIViewManager.Instance.Show<PopupLevelLose>();
     }
 }
