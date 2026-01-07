@@ -2,6 +2,7 @@ using UnityEngine;
 using CrazyPopper.Events;
 using CrazyPopper.UI;
 using CrazyPopper.Core;
+using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -9,14 +10,19 @@ public class GameManager : MonoBehaviour
     public AudioManager audioManager;
     [SerializeField] private GridSpawner gridSpawner;
     private int alivePoppers;
-    internal int currentLevelIndex = 0;
+    internal int currentLevelIndex = 1;
+
+    internal ScoreData scoreData = new ScoreData();
+
+
+    Coroutine gameInitCoroutine;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void RegisterPopper() => alivePoppers++;
+    //public void RegisterPopper() => alivePoppers++;
     public void UnregisterPopper() => alivePoppers--;
 
 
@@ -30,8 +36,22 @@ public class GameManager : MonoBehaviour
 
     public void InitializeGame()
     {
+        Debug.Log("Initializing Level: " + currentLevelIndex);
         ResetAllCounters();
-        LevelConfig level = levelsSO.levels[currentLevelIndex];
+        LevelConfig level = levelsSO.levels[currentLevelIndex - 1];
+        TurnManager.Instance.RemainingMoves = level.maxTaps;
+        alivePoppers = level.popperLayout.FindAll(state => state != CrazyPopper.Poppers.PopperState.None).Count;
+        if (gameInitCoroutine != null)
+        {
+            StopCoroutine(gameInitCoroutine);
+        }
+        gameInitCoroutine = StartCoroutine(DelayStartGame());
+    }
+
+    IEnumerator DelayStartGame()
+    {
+        yield return new WaitForSeconds(0.1f);
+        LevelConfig level = levelsSO.levels[currentLevelIndex - 1];
         gridSpawner.Spawn(level);
         EventBus.RaiseGameInitialized(level);
     }
@@ -44,17 +64,27 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         EventBus.OnAllReactionsResolved += OnAllReactionsResolved;
-        EventBus.OnRegisterPopper += RegisterPopper;
+        // EventBus.OnRegisterPopper += RegisterPopper;
         EventBus.OnConsumedMove += OnMoveConsumed;
         EventBus.OnUnRegisterPopper += UnregisterPopper;
+        EventBus.OnClickLevel += (levelIndex) =>
+        {
+            scoreData.currentScore = 0;
+            currentLevelIndex = levelIndex;
+            InitializeGame();
+        };
     }
 
     void OnDisable()
     {
         EventBus.OnAllReactionsResolved -= OnAllReactionsResolved;
         EventBus.OnConsumedMove -= OnMoveConsumed;
-        EventBus.OnRegisterPopper -= RegisterPopper;
+        // EventBus.OnRegisterPopper -= RegisterPopper;
         EventBus.OnUnRegisterPopper -= UnregisterPopper;
+        EventBus.OnClickLevel -= (levelIndex) =>
+       {
+
+       };
     }
 
     public void OnAllReactionsResolved()
@@ -86,7 +116,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LEVEL COMPLETE");
         // UI, audio, next level
+        scoreData.tapBonusScore = TurnManager.Instance.RemainingMoves * GameConstants.SCORE_PER_REMAINING_TAP;
+        scoreData.totalScore = scoreData.currentScore + scoreData.tapBonusScore;
+        ProgressManager.Instance.TrySetLevelBest(currentLevelIndex, scoreData.totalScore);
         UIViewManager.Instance.Show<PopupLevelWin>();
+
     }
 
     private void Lose()
@@ -94,5 +128,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("LEVEL FAILED");
         // UI, retry
         UIViewManager.Instance.Show<PopupLevelLose>();
+        EventBus.RaiseLevelFailed();
     }
+}
+
+
+public class ScoreData
+{
+    public int currentScore;
+    public int tapBonusScore;
+    public int totalScore;
 }

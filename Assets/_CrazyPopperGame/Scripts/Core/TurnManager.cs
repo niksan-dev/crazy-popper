@@ -4,7 +4,7 @@ public class TurnManager : MonoBehaviour
 {
     public static TurnManager Instance;
 
-    public int RemainingMoves { get; private set; }
+    public int RemainingMoves;
 
     private void Awake()
     {
@@ -28,8 +28,6 @@ public class TurnManager : MonoBehaviour
             RemainingMoves = 0;
         };
     }
-
-
 
     public void Init(int moves)
     {

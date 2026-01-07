@@ -1,10 +1,11 @@
 using UnityEngine;
 using CrazyPopper.Poppers;
 using CrazyPopper.Events;
+using CrazyPopper.Core;
 
 namespace CrazyPopper.Projectiles
 {
-    public class Projectile : MonoBehaviour, IPoolable
+    public class Projectile : MonoBehaviour, IPoolable, IDeSpawnable
     {
         private Vector2 dir;
         private float speed = 8f;
@@ -40,12 +41,17 @@ namespace CrazyPopper.Projectiles
 
         public void OnSpawn()
         {
-
+            this.transform.parent = GridSpawner.Instance.transform;
         }
 
         public void OnDespawn()
         {
+            this.transform.parent = PoolRegistry.Instance.transform;
+        }
 
+        public void Despawn()
+        {
+            ProjectileFactory.DeSpawn(this);
         }
     }
 }

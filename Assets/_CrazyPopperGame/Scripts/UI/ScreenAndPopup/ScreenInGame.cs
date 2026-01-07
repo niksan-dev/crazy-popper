@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrazyPopper.Events;
 using UnityEngine;
 
 namespace CrazyPopper.UI
@@ -8,9 +9,11 @@ namespace CrazyPopper.UI
     {
         protected override void OnShow()
         {
+
+            EventBus.RaiseConsumedMove(TurnManager.Instance.RemainingMoves);
             Debug.Log("In Game Screen Opened");
             // Initialize game elements here
-            GameManager.Instance.InitializeGame();
+
         }
 
         protected override void OnHide()

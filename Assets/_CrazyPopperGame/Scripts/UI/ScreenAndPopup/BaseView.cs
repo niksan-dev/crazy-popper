@@ -20,6 +20,7 @@ namespace CrazyPopper.UI
             gameObject.SetActive(true);
             OnShow();
             PlayEnterAnimation();
+            this.transform.SetAsLastSibling();
         }
 
         public void Hide()

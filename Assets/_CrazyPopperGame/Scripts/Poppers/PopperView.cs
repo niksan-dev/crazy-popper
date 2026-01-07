@@ -33,6 +33,11 @@ namespace CrazyPopper.Poppers
             Sprite spr = config.GetSprite(state);
             // Debug.Log($"Sprite Name : {spr.name}");
             sr.sprite = spr;
+            if (_entity.transform.childCount > 0)
+            {
+                EyeFactory.DetachEyes(_entity.transform);
+            }
+            EyeFactory.AttachEyes(_entity.transform, state);
         }
 
         private void AttachEyes()

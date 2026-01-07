@@ -36,6 +36,7 @@ public class ObjectPool<T> where T : Component, IPoolable
     {
         obj.OnDespawn();
         obj.gameObject.SetActive(false);
+        obj.transform.parent = root;
         pool.Push(obj);
     }
 }

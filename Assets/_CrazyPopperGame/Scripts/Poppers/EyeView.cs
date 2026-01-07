@@ -11,7 +11,7 @@ namespace CrazyPopper.Poppers
 
         public void OnDespawn()
         {
-            transform.SetParent(null);
+            // transform.SetParent(null);
         }
     }
 }

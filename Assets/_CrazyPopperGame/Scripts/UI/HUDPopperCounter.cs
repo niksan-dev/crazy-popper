@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using CrazyPopper.Events;
+using CrazyPopper.Poppers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,21 @@ public class HUDPopperCounter : MonoBehaviour
     {
         EventBus.OnRegisterPopper += OnRegisterPopper;
         EventBus.OnUnRegisterPopper += OnUnRegisterPopper;
+        EventBus.OnLevelRetry += OnLevelRetry;
+        EventBus.OnGameInitialized += (level) =>
+        {
+
+            int popperCount = level.popperLayout.FindAll(state => state != PopperState.None).Count;
+            Debug.Log("HUDPopperCounter - OnGameInitialized received popperCount: " + popperCount);
+            this.popperCount = popperCount;
+            UpdatePopperCounterText();
+        };
+        UpdatePopperCounterText();
+    }
+
+    void OnLevelRetry()
+    {
+        popperCount = 0;
         UpdatePopperCounterText();
     }
 
@@ -39,5 +55,10 @@ public class HUDPopperCounter : MonoBehaviour
     {
         EventBus.OnRegisterPopper -= OnRegisterPopper;
         EventBus.OnUnRegisterPopper -= OnUnRegisterPopper;
+        EventBus.OnLevelRetry -= OnLevelRetry;
+        EventBus.OnGameInitialized -= (level) =>
+       {
+
+       };
     }
 }

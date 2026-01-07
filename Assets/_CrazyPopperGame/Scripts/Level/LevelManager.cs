@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] Transform levelsContainer;
     [SerializeField] LevelsSO levelsSO;
     [SerializeField] UILevel uiLevelPrefab;
     void Awake()
@@ -17,8 +18,8 @@ public class LevelManager : MonoBehaviour
         foreach (var item in levelsSO.levels)
         {
             Debug.Log("Level: " + item.maxTaps);
-            UILevel uiLevel = Instantiate(uiLevelPrefab, transform);
-            uiLevel.SetLevelNumber(i);
+            UILevel uiLevel = Instantiate(uiLevelPrefab, levelsContainer);
+            uiLevel.SetLevelNumber(i, item);
             i++;
         }
     }

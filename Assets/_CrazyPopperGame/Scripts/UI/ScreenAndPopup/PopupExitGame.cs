@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrazyPopper.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ namespace CrazyPopper.UI
         {
             btnYes.onClick.AddListener(OnYesClick);
             btnNo.onClick.AddListener(OnNoClick);
+
+           
         }
 
         void OnYesClick()

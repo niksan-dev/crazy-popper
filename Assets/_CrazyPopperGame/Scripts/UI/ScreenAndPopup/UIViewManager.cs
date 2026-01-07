@@ -128,8 +128,14 @@ namespace CrazyPopper.UI
             screen.Show();
         }
 
-        private void ShowPopup(PopupView popup)
+        private void ShowPopup(PopupView popup, bool hideCurrent = true)
         {
+            //hide current popup if any
+            if (popupStack.Count > 0 && hideCurrent)
+            {
+                PopupView topPopup = popupStack.Peek();
+                topPopup.Hide();
+            }
             popupStack.Push(popup);
             popup.Show();
         }

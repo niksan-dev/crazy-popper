@@ -3,7 +3,7 @@ using CrazyPopper.Poppers;
 
 public static class PopperFactory
 {
-    public static PopperEntity Create(
+    public static PopperEntity Spawn(
         Vector3 position,
         PopperState state
     )
@@ -12,12 +12,12 @@ public static class PopperFactory
             .Spawn(position, Quaternion.identity);
 
         popper.Initialize(state);
-        EyeFactory.AttachEyes(popper.transform);
+        //EyeFactory.AttachEyes(popper.transform);
 
         return popper;
     }
 
-    public static void Destroy(PopperEntity popper)
+    public static void DeSpawn(PopperEntity popper)
     {
         PoolRegistry.Instance.PopperPool.Despawn(popper);
         EyeFactory.DetachEyes(

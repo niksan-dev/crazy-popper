@@ -5,6 +5,8 @@ public class PoolRegistry : MonoBehaviour
 {
     public static PoolRegistry Instance { get; private set; }
 
+    public Transform gridSpawnerTransform;
+
     [Header("Prefabs")]
     public PopperEntity popperPrefab;
     public EyeView leftEyePrefab;
