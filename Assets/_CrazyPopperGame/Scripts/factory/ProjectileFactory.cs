@@ -2,7 +2,6 @@ using UnityEngine;
 using CrazyPopper.Projectiles;
 public static class ProjectileFactory
 {
-    public static GameObject projectilePrefab;
 
     public static void Spawn(Vector3 position)
     {
@@ -17,5 +16,10 @@ public static class ProjectileFactory
         var p = PoolRegistry.Instance.ProjectilePool
             .Spawn(pos, Quaternion.identity);
         p.GetComponent<Projectile>().Init(dir);
+    }
+
+    public static void DeSpawn(Projectile projectile)
+    {
+        PoolRegistry.Instance.ProjectilePool.Despawn(projectile);
     }
 }
